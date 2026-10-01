@@ -142,7 +142,7 @@
           <h2 class="text-2xl sm:text-3xl font-black text-cyan-400 mb-1" id="resultHeaderTitle">പരീക്ഷാ ഫലം (Exam Result)</h2>
           <p class="text-sm text-slate-400 mb-1" id="resultCandidateInfo"></p>
           <span id="resultSubBadge" class="inline-block text-[11px] text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800">
-            ✓ ഫലം പ്രൊഫൈൽ ഹിസ്റ്ററിയിൽ രേഖപ്പെടുത്തിയിട്ടുണ്ട്
+            ✓ ഫലം ഫയർബേസ് പ്രൊഫൈൽ ഹിസ്റ്ററിയിൽ രേഖപ്പെടുത്തിയിട്ടുണ്ട്
           </span>
         </div>
 
@@ -176,7 +176,7 @@
           </div>
         </div>
 
-        <div id="sheetStatus" class="text-xs text-cyan-400 animate-pulse">സ്കോർ ഗൂഗിൾ ഷീറ്റിലേക്ക് രേഖപ്പെടുത്തുന്നു...</div>
+        <div id="sheetStatus" class="text-xs text-cyan-400 animate-pulse">സ്കോർ ഫയർബേസിലേക്ക് രേഖപ്പെടുത്തുന്നു...</div>
 
         <!-- 8 Mark Cut-off Warning Box -->
         <div id="pdfLockNotice" class="hidden max-w-md mx-auto p-3.5 bg-rose-950/40 border border-rose-800/80 rounded-xl text-xs text-rose-300">
@@ -224,17 +224,17 @@
       </div>
     </div>
 
-    <!-- Leaderboard Modal -->
+    <!-- Leaderboard Modal (Firebase Native) -->
     <div id="leaderboardModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
       <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-xl w-full p-6 shadow-2xl flex flex-col max-h-[85vh]">
         <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-4">
           <div>
-            <h3 class="text-xl font-bold text-cyan-400">ലൈവ് റാങ്ക് ലിസ്റ്റ് (Google Sheet)</h3>
+            <h3 class="text-xl font-bold text-cyan-400">ലൈവ് റാങ്ക് ലിസ്റ്റ് (Live Ranking)</h3>
             <p class="text-xs text-slate-400">ആദ്യ ശ്രമത്തിലെ സ്കോർ അടിസ്ഥാനമാക്കി ക്രമീകരിച്ചത്</p>
           </div>
           <button type="button" onclick="closeLeaderboard()" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
         </div>
-        <div id="leaderboardLoading" class="py-10 text-center text-sm text-slate-400">ഗൂഗിൾ ഷീറ്റിൽ നിന്നും റാങ്ക് ലിസ്റ്റ് ശേഖരിക്കുന്നു...</div>
+        <div id="leaderboardLoading" class="py-10 text-center text-sm text-slate-400">ഫയർബേസിൽ നിന്നും റാങ്ക് ലിസ്റ്റ് ശേഖരിക്കുന്നു...</div>
         <div class="flex-1 overflow-y-auto custom-scroll pr-1 hidden" id="leaderboardTableWrapper">
           <table class="w-full text-left text-sm">
             <thead class="text-xs uppercase bg-slate-900/80 text-slate-400 sticky top-0">
@@ -270,12 +270,11 @@
   </main>
 
   <footer class="text-center py-3 text-[11px] text-slate-500 border-t border-slate-800">
-    നദീതടങ്ങൾ, ജലസേചനം & കറന്റ് അഫയേഴ്സ് (സെറ്റ് 3)[cite: 14] | PSC Model Exam
+    നദീതടങ്ങൾ, ജലസേചനം & കറന്റ് അഫയേഴ്സ് (സെറ്റ് 3) | PSC Model Exam
   </footer>
 
   <script>
-    let GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbztE9bExjlH5a9Y_O8pU9CzVZy5zl-wzycDISurGzxqwuWB71Nxquzpg00Ocf2QR9Zb/exec";
-    const QUIZ_SHEET_NAME = "നദീതടങ്ങൾ, ജലസേചനം സെറ്റ് 3";
+    const FIREBASE_DB_URL = "https://sk-psc-portal-default-rtdb.asia-southeast1.firebasedatabase.app";
     let ORIGINAL_PDF_URL = "https://docs.google.com/document/d/YOUR_GOOGLE_DOC_ID/export?format=pdf";
     let examTitle = "നദീതടങ്ങൾ, ജലസേചനം സെറ്റ് 3";
 
@@ -284,151 +283,151 @@
         q: "പെരിയാർ നദിയിലെ ചരിത്രപ്രസിദ്ധമായ 1341-ലെ മഹാപ്രളയത്തിൽ പൂർണ്ണമായി നശിച്ചുപോയ പ്രാചീന തുറമുഖം ഏതാണ്?",
         options: ["കൊടുങ്ങല്ലൂർ (മുസിരിസ്)", "പൊന്നാനി", "വിഴിഞ്ഞം", "ബേപ്പൂർ"],
         ans: 0,
-        exp: "എ.ഡി. 1341-ലുണ്ടായ പെരിയാറിലെ പ്രളയത്തിലാണ് പ്രാചീന തുറമുഖമായ മുസിരിസ് (കൊടുങ്ങല്ലൂർ) മണ്ണടിഞ്ഞ് നശിക്കുകയും കൊച്ചി പ്രകൃതിദത്ത തുറമുഖമായി രൂപപ്പെടുകയും ചെയ്തത്[cite: 14]."
+        exp: "എ.ഡി. 1341-ലുണ്ടായ പെരിയാറിലെ പ്രളയത്തിലാണ് പ്രാചീന തുറമുഖമായ മുസിരിസ് (കൊടുങ്ങല്ലൂർ) മണ്ണടിഞ്ഞ് നശിക്കുകയും കൊച്ചി പ്രകൃതിദത്ത തുറമുഖമായി രൂപപ്പെടുകയും ചെയ്തത്."
       },
       {
         q: "കേരളത്തിലെ കാലാവസ്ഥാ വിഭാഗങ്ങളെയും കാറ്റുകളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കേരളത്തിൽ എത്തിച്ചേരുന്നത് സാധാരണയായി ഒക്ടോബർ മാസത്തിലാണ് .\n2. ഗ്രീക്ക് നാവികനായ ഹിപ്പാലസ് എ.ഡി. 45-ൽ മൺസൂൺ കാറ്റുകളുടെ ഗതിയും വേഗതയും കണ്ടെത്തി കടൽമാർഗ്ഗം കേരളത്തിലെത്തി .\n3. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കാറ്റുകൾ 'ഹിപ്പാലസ് കാറ്റുകൾ' എന്ന പേരിലും അറിയപ്പെടുന്നു .",
         options: ["1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്", "1 മാത്രം ശരിയാണ്"],
         ans: 2,
-        exp: "പ്രസ്താവന 1 തെറ്റാണ്[cite: 14]. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കേരളത്തിൽ ജൂൺ ആദ്യവാരത്തോടെയാണ് ആരംഭിക്കുന്നത്[cite: 14]. 2, 3 പ്രസ്താവനകൾ ശരിയാണ്[cite: 14]."
+        exp: "പ്രസ്താവന 1 തെറ്റാണ്. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കേരളത്തിൽ ജൂൺ ആദ്യവാരത്തോടെയാണ് ആരംഭിക്കുന്നത്. 2, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
       {
         q: "കേരളത്തിൽ അന്യംനിന്നുപോകുന്ന നാട്ടുമാവുകളെ സംരക്ഷിക്കുന്നതിനായി വനം-വന്യജീവി വകുപ്പ് ആരംഭിച്ച സംരക്ഷണ പദ്ധതി ഏതാണ്?",
         options: ["ഹരിതകേരളം", "നാട്ടുമാവും തണലും", "മിനി പമ്പ", "തണൽമരം"],
         ans: 1,
-        exp: "കേരളത്തിലെ പരമ്പരാഗത നാട്ടുമാവിനങ്ങളെ കണ്ടെത്തി സംരക്ഷിക്കുന്നതിനായി വനം വകുപ്പ് നടപ്പിലാക്കിയ ജനകീയ പദ്ധതിയാണ് 'നാട്ടുമാവും തണലും'[cite: 14]."
+        exp: "കേരളത്തിലെ പരമ്പരാഗത നാട്ടുമാവിനങ്ങളെ കണ്ടെത്തി സംരക്ഷിക്കുന്നതിനായി വനം വകുപ്പ് നടപ്പിലാക്കിയ ജനകീയ പദ്ധതിയാണ് 'നാട്ടുമാവും തണലും'."
       },
       {
         q: "കേരളത്തിലെ കടുവ സംരക്ഷണ കേന്ദ്രങ്ങളെക്കുറിച്ചുള്ള താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. പെരിയാർ കടുവ സങ്കേതം ഇന്ത്യയിലെ പത്താമത്തെ ടൈഗർ റിസർവാണ് .\n2. കേരളത്തിലെ രണ്ടാമത്തെ കടുവ സംരക്ഷണ കേന്ദ്രമായ പറമ്പിക്കുളം തൃശ്ശൂർ ജില്ലയിലാണ് സ്ഥിതി ചെയ്യുന്നത് .\n3. 2010-ലാണ് പറമ്പിക്കുളത്തെ കടുവ സംരക്ഷണ കേന്ദ്രമായി ഔദ്യോഗികമായി കേന്ദ്രസർക്കാർ പ്രഖ്യാപിച്ചത് .",
         options: ["2 മാത്രം തെറ്റാണ്", "1 മാത്രം തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "1, 3 തെറ്റാണ്"],
         ans: 0,
-        exp: "പ്രസ്താവന 2 തെറ്റാണ്[cite: 14]. പറമ്പിക്കുളം സ്ഥിതി ചെയ്യുന്നത് പാലക്കാട് ജില്ലയിലാണ് (തൃശ്ശൂരിലല്ല)[cite: 14]. 1, 3 പ്രസ്താവനകൾ ശരിയാണ്[cite: 14]."
+        exp: "പ്രസ്താവന 2 തെറ്റാണ്. പറമ്പിക്കുളം സ്ഥിതി ചെയ്യുന്നത് പാലക്കാട് ജില്ലയിലാണ് (തൃശ്ശൂരിലല്ല). 1, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
       {
         q: "കേരളത്തിൽ ഏറ്റവും കൂടുതൽ വനവിസ്തൃതിയുള്ള നദീതടമുള്ള രണ്ടാമത്തെ വലിയ നദി ഏതാണ്?",
         options: ["ചാലിയാർ", "പമ്പ", "ഭാരതപ്പുഴ", "ചാലക്കുടിപ്പുഴ"],
         ans: 2,
-        exp: "209 കിലോമീറ്റർ നീളമുള്ള ഭാരതപ്പുഴയാണ് കേരളത്തിൽ ഏറ്റവും കൂടുതൽ നദീതട വിസ്തൃതിയുള്ള (River Basin Area) നദി[cite: 14]."
+        exp: "209 കിലോമീറ്റർ നീളമുള്ള ഭാരതപ്പുഴയാണ് കേരളത്തിൽ ഏറ്റവും കൂടുതൽ നദീതട വിസ്തൃതിയുള്ള (River Basin Area) നദി."
       },
       {
         q: "കേരളത്തിലെ കായലുകളിലേക്കും കടലിലേക്കും പതിക്കുന്ന നദികളെ സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. പരവൂർ കായലിൽ പതിക്കുന്ന പ്രധാന നദിയാണ് ഇത്തിക്കരയാർ .\n2. ഭാരതപ്പുഴ നേരിട്ട് വേമ്പനാട്ട് കായലിലാണ് പതിക്കുന്നത് .\n3. പമ്പാനദി അറബിക്കടലിലേക്ക് നേരിട്ടാണ് പതിക്കുന്നത്, കായലുകളുമായി ഇതിന് ബന്ധമില്ല .",
         options: ["1, 2 ശരിയാണ്", "1 മാത്രം ശരിയാണ്", "2, 3 ശരിയാണ്", "3 മാത്രം ശരിയാണ്"],
         ans: 1,
-        exp: "പ്രസ്താവന 1 മാത്രം ശരിയാണ്[cite: 14]. പ്രസ്താവന 2 തെറ്റാണ് (ഭാരതപ്പുഴ പൊന്നാനിയിൽ അറബിക്കടലിലാണ് പതിക്കുന്നത്)[cite: 14]. പ്രസ്താവന 3 തെറ്റാണ് (പമ്പാനദി പതിക്കുന്നത് വേമ്പനാട്ട് കായലിലാണ്)[cite: 14]."
+        exp: "പ്രസ്താവന 1 മാത്രം ശരിയാണ്. പ്രസ്താവന 2 തെറ്റാണ് (ഭാരതപ്പുഴ പൊന്നാനിയിൽ അറബിക്കടലിലാണ് പതിക്കുന്നത്). പ്രസ്താവന 3 തെറ്റാണ് (പമ്പാനദി പതിക്കുന്നത് വേമ്പനാട്ട് കായലിലാണ്)."
       },
       {
         q: "പ്രശസ്തമായ മാരാമൺ കൺവെൻഷനും ചെറുകോൽപ്പുഴ ഹിന്ദു മതസമ്മേളനവും നടക്കുന്നത് ഏത് നദിയുടെ മണപ്പുറത്താണ്?",
         options: ["പെരിയാർ", "ഭാരതപ്പുഴ", "മണിമലയാർ", "പമ്പാനദി"],
         ans: 3,
-        exp: "പത്തനംതിട്ട ജില്ലയിലെ കോഴഞ്ചേരിക്കടുത്ത് പമ്പാനദിയുടെ വിസ്തൃതമായ മണപ്പുറത്താണ് ഏഷ്യയിലെ ഏറ്റവും വലിയ ക്രിസ്തീയ കൂട്ടായ്മയായ മാരാമൺ കൺവെൻഷനും ചെറുകോൽപ്പുഴ ഹിന്ദുമത കൺവെൻഷനും നടക്കുന്നത്[cite: 14]."
+        exp: "പത്തനംതിട്ട ജില്ലയിലെ കോഴഞ്ചേരിക്കടുത്ത് പമ്പാനദിയുടെ വിസ്തൃതമായ മണപ്പുറത്താണ് ഏഷ്യയിലെ ഏറ്റവും വലിയ ക്രിസ്തീയ കൂട്ടായ്മയായ മാരാമൺ കൺവെൻഷനും ചെറുകോൽപ്പുഴ ഹിന്ദുമത കൺവെൻഷനും നടക്കുന്നത്."
       },
       {
         q: "കേരളത്തിലെ പക്ഷിസങ്കേതങ്ങളെ സംബന്ധിച്ച താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. സലിം അലി പക്ഷിസങ്കേതം എന്നറിയപ്പെടുന്നത് എറണാകുളം ജില്ലയിലെ തട്ടേക്കാടാണ് .\n2. ഡോ. സലിം അലി രചിച്ച വിഖ്യാത ഗ്രന്ഥമാണ് 'കേരളത്തിലെ പക്ഷികൾ' .\n3. കുമരകം പക്ഷിസങ്കേതം പൂർണ്ണമായും കാട്ടാനകളുടെ സംരക്ഷണത്തിനായുള്ള കേന്ദ്രമാണ് .",
         options: ["1 മാത്രം തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
         ans: 3,
-        exp: "പ്രസ്താവന 2 ഉം 3 ഉം തെറ്റാണ്[cite: 14]. 'കേരളത്തിലെ പക്ഷികൾ' എന്ന ഗ്രന്ഥം രചിച്ചത് കെ.കെ. നീലകണ്ഠനാണ് (ഇന്ദുചൂഡൻ)[cite: 14]. കുമരകം വേമ്പനാട്ട് കായൽത്തീരത്തെ ദേശാടനപ്പക്ഷികളുടെ സങ്കേതമാണ് (കാട്ടാന സങ്കേതമല്ല)[cite: 14]. പ്രസ്താവന 1 ശരിയാണ്[cite: 14]."
+        exp: "പ്രസ്താവന 2 ഉം 3 ഉം തെറ്റാണ്. 'കേരളത്തിലെ പക്ഷികൾ' എന്ന ഗ്രന്ഥം രചിച്ചത് കെ.കെ. നീലകണ്ഠനാണ് (ഇന്ദുചൂഡൻ). കുമരകം വേമ്പനാട്ട് കായൽത്തീരത്തെ ദേശാടനപ്പക്ഷികളുടെ സങ്കേതമാണ് (കാട്ടാന സങ്കേതമല്ല). പ്രസ്താവന 1 ശരിയാണ്."
       },
       {
         q: "തിരുവനന്തപുരം ജില്ലയിലെ അരുവിക്കര, പേപ്പാറ എന്നീ അണക്കെട്ടുകൾ ഏത് നദിയിലാണ് സ്ഥിതി ചെയ്യുന്നത്?",
         options: ["കരമനയാർ", "നെയ്യാർ", "വാമനപുരം നദി", "മാമം നദി"],
         ans: 0,
-        exp: "തിരുവനന്തപുരം നഗരത്തിലേക്ക് കുടിവെള്ളം വിതരണം ചെയ്യുന്ന അരുവിക്കര, പേപ്പാറ ഡാമുകൾ കരമന നദിയിലാണ് നിർമ്മിച്ചിട്ടുള്ളത്[cite: 14]."
+        exp: "തിരുവനന്തപുരം നഗരത്തിലേക്ക് കുടിവെള്ളം വിതരണം ചെയ്യുന്ന അരുവിക്കര, പേപ്പാറ ഡാമുകൾ കരമന നദിയിലാണ് നിർമ്മിച്ചിട്ടുള്ളത്."
       },
       {
         q: "കേരളത്തിലെ ചില പ്രധാന വെള്ളച്ചാട്ടങ്ങളെയും നദികളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. ചാലിയാറിന്റെ പോഷകനദിയായ ചാലിപ്പുഴയിലാണ് തുഷാരഗിരി വെള്ളച്ചാട്ടം സ്ഥിതി ചെയ്യുന്നത് .\n2. പെരിയാറിലാണ് ദക്ഷിണേന്ത്യയിലെ ഏറ്റവും വലിയ വെള്ളച്ചാട്ടമായ പാലരുവി സ്ഥിതി ചെയ്യുന്നത് .\n3. പത്തനംതിട്ട ജില്ലയിലെ പെരുന്തേനരുവി വെള്ളച്ചാട്ടം പമ്പാനദിയിലാണ് സ്ഥിതി ചെയ്യുന്നത് .",
         options: ["1, 2 ശരിയാണ്", "2, 3 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2 മാത്രം ശരിയാണ്"],
         ans: 2,
-        exp: "പ്രസ്താവന 2 തെറ്റാണ്[cite: 14]. പാലരുവി വെള്ളച്ചാട്ടം കൊല്ലം ജില്ലയിൽ കല്ലടയാറിലാണ് സ്ഥിതി ചെയ്യുന്നത് (പെരിയാറിലല്ല)[cite: 14]. 1, 3 പ്രസ്താവനകൾ ശരിയാണ്[cite: 14]."
+        exp: "പ്രസ്താവന 2 തെറ്റാണ്. പാലരുവി വെള്ളച്ചാട്ടം കൊല്ലം ജില്ലയിൽ കല്ലടയാറിലാണ് സ്ഥിതി ചെയ്യുന്നത് (പെരിയാറിലല്ല). 1, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
       {
         q: "2024 മെയ് മാസത്തിൽ കുളത്തുപ്പുഴയിലെ ചെന്തുരുണി വന്യജീവി സങ്കേതത്തിൽ നിന്നും പുതുതായി കണ്ടെത്തിയ ചിലന്തി ഇനം ഏതാണ്?",
         options: ["ഹൊറബാഗ്രസ് ഒബ്സ്ക്യൂറസ്", "ഹാബ്രോസെസ്റ്റം സഹ്യാദ്രി", "ഗ്ലൂട്ടാ ട്രാവൻകൂറിക്ക", "സ്ട്രോബിലാന്തസ്"],
         ans: 1,
-        exp: "ചെന്തുരുണി വന്യജീവി സങ്കേതത്തിൽ നിന്ന് കണ്ടെത്തിയ പുതിയ ചാടുന്ന ചിലന്തി വർഗ്ഗങ്ങളാണ് 'ഹാബ്രോസെസ്റ്റം സഹ്യാദ്രി' (Habrocestum sahyadri), 'ഇരുര ഷെന്തുരുണി' (Irura shendurney) എന്നിവ[cite: 14]."
+        exp: "ചെന്തുരുണി വന്യജീവി സങ്കേതത്തിൽ നിന്ന് കണ്ടെത്തിയ പുതിയ ചാടുന്ന ചിലന്തി വർഗ്ഗങ്ങളാണ് 'ഹാബ്രോസെസ്റ്റം സഹ്യാദ്രി' (Habrocestum sahyadri), 'ഇരുര ഷെന്തുരുണി' (Irura shendurney) എന്നിവ."
       },
       {
         q: "കേരളത്തിലെ കാലാവസ്ഥയെയും കാറ്റുകളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ താഴെ നൽകിയവയിൽ തെറ്റായവ ഏവ?\n1. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കാലത്ത് കേരളത്തിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്നത് തിരുവനന്തപുരം ജില്ലയിലാണ് .\n2. തമിഴ്നാട്ടിലെയും കർണാടകയിലെയും കാലാവസ്ഥാ വ്യതിയാനങ്ങളിൽ പാലക്കാട് ചുരം നിർണ്ണായക സ്വാധീനം ചെലുത്തുന്നു .\n3. കേരളത്തിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്ന മാസം ജൂലൈ മാസമാണ് .",
         options: ["2 മാത്രം തെറ്റാണ്", "1 മാത്രം തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "1, 3 തെറ്റാണ്"],
         ans: 1,
-        exp: "പ്രസ്താവന 1 തെറ്റാണ്[cite: 14]. തെക്കുപടിഞ്ഞാറൻ മൺസൂണിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്നത് ഇടുക്കിയിലാണ്; തിരുവനന്തപുരം ജില്ലയിൽ മഴ ഏറ്റവും കുറവാണ്[cite: 14]. 2, 3 പ്രസ്താവനകൾ ശരിയാണ്[cite: 14]."
+        exp: "പ്രസ്താവന 1 തെറ്റാണ്. തെക്കുപടിഞ്ഞാറൻ മൺസൂണിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്നത് ഇടുക്കിയിലാണ്; തിരുവനന്തപുരം ജില്ലയിൽ മഴ ഏറ്റവും കുറവാണ്. 2, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
       {
         q: "ശബരിമല തീർത്ഥാടനവുമായി ബന്ധപ്പെട്ട് ഭാരതപ്പുഴയുടെ തീരത്ത് കുറ്റിപ്പുറം പാലത്തിന് സമീപം പ്രഖ്യാപിക്കപ്പെട്ട ഇടത്താവളം ഏത് പേരിൽ അറിയപ്പെടുന്നു?",
         options: ["പമ്പാ സംഗമം", "ശോകനാശിനി ഘട്ട്", "മിനി പമ്പ", "നിള തീർത്ഥാടനം"],
         ans: 2,
-        exp: "മലപ്പുറം ജില്ലയിലെ കുറ്റിപ്പുറത്ത് ഭാരതപ്പുഴയുടെ തീരത്തുള്ള സ്നാനഘട്ടമാണ് ശബരിമല തീർത്ഥാടകർക്കായി 'മിനി പമ്പ' എന്ന പേരിൽ ഔദ്യോഗികമായി പ്രഖ്യാപിക്കപ്പെട്ടത്[cite: 14]."
+        exp: "മലപ്പുറം ജില്ലയിലെ കുറ്റിപ്പുറത്ത് ഭാരതപ്പുഴയുടെ തീരത്തുള്ള സ്നാനഘട്ടമാണ് ശബരിമല തീർത്ഥാടകർക്കായി 'മിനി പമ്പ' എന്ന പേരിൽ ഔദ്യോഗികമായി പ്രഖ്യാപിക്കപ്പെട്ടത്."
       },
       {
         q: "കേരളത്തിലെ വന്യജീവി സങ്കേതങ്ങളുടെ രൂപീകരണ വർഷങ്ങളെക്കുറിച്ചുള്ള താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. പെരിയാർ വന്യജീവി സങ്കേതം നിലവിൽ വന്നത് 2011-ലാണ് .\n2. മലപ്പുറം ജില്ലയിലെ കരിമ്പുഴ വന്യജീവി സങ്കേതം സ്ഥാപിതമായത് 1950-ലാണ് .\n3. ഇടുക്കി ജില്ലയിലെ കുറിഞ്ഞിമല ഉദ്യാനം നിലവിൽ വന്നത് 1973-ലാണ് .",
         options: ["1, 2 തെറ്റാണ്", "2, 3 തെറ്റാണ്", "1, 3 തെറ്റാണ്", "എല്ലാം തെറ്റാണ്"],
         ans: 3,
-        exp: "നൽകിയിരിക്കുന്ന മൂന്ന് പ്രസ്താവനകളും പൂർണ്ണമായും തെറ്റാണ്[cite: 14]. പെരിയാർ നിലവിൽ വന്നത് 1950-ലാണ് (ആദ്യത്തേത്); കരിമ്പുഴ നിലവിൽ വന്നത് 2020-ലാണ് (18-ാമത്തേത്); കുറിഞ്ഞിമല നിലവിൽ വന്നത് 2006-ലാണ്[cite: 14]."
+        exp: "നൽകിയിരിക്കുന്ന മൂന്ന് പ്രസ്താവനകളും പൂർണ്ണമായും തെറ്റാണ്. പെരിയാർ നിലവിൽ വന്നത് 1950-ലാണ് (ആദ്യത്തേത്); കരിമ്പുഴ നിലവിൽ വന്നത് 2020-ലാണ് (18-ാമത്തേത്); കുറിഞ്ഞിമല നിലവിൽ വന്നത് 2006-ലാണ്."
       },
       {
         q: "കാൽനൂറ്റാണ്ട് മുൻപ് വറ്റിവരണ്ടുപോവുകയും പിന്നീട് ജനകീയ കൂട്ടായ്മയിലൂടെ ഒഴുക്ക് വീണ്ടെടുക്കുകയും ചെയ്ത അട്ടപ്പാടിയിലെ ഭവാനിയുടെ പോഷകനദി ഏത്?",
         options: ["ശിരുവാണി", "വരഗാർ", "കുന്തിപ്പുഴ", "കൊടുങ്ങരപ്പള്ളം"],
         ans: 3,
-        exp: "തമിഴ്നാട് അതിർത്തിയിലെ പെരുമാൾമുടിയിൽ നിന്ന് ഉത്ഭവിച്ച് അട്ടപ്പാടിയിലൂടെ ഒഴുകി ഭവാനിയിൽ പതിക്കുന്ന കൊടുങ്ങരപ്പള്ളം പുഴയാണ് തദ്ദേശീയ ജനങ്ങളുടെ ശ്രമഫലമായി പുനരുജ്ജീവിപ്പിച്ചത്[cite: 14]."
+        exp: "തമിഴ്നാട് അതിർത്തിയിലെ പെരുമാൾമുടിയിൽ നിന്ന് ഉത്ഭവിച്ച് അട്ടപ്പാടിയിലൂടെ ഒഴുകി ഭവാനിയിൽ പതിക്കുന്ന കൊടുങ്ങരപ്പള്ളം പുഴയാണ് തദ്ദേശീയ ജനങ്ങളുടെ ശ്രമഫലമായി പുനരുജ്ജീവിപ്പിച്ചത്."
       },
       {
         q: "കേരളത്തിലെ ആന സംരക്ഷണ പദ്ധതികളെയും കേന്ദ്രങ്ങളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. ഇന്ത്യയിൽ പ്രൊജക്ട് എലിഫന്റ് ആരംഭിച്ച വർഷം 1972 ആണ് .\n2. കേരളത്തിൽ കാട്ടാനകളുടെ ശല്യം കാരണം ആദ്യമായി പൂർണ്ണമായി ഒഴിപ്പിക്കപ്പെട്ട പ്രദേശം നിലമ്പൂരാണ് .\n3. വന്യജീവി സങ്കേതമായ ചിന്നക്കനാലിലെ ആനയിറങ്ങലിലാണ് കേരളത്തിലെ ആദ്യത്തെ കാട്ടാന ഉദ്യാനം വിഭാവനം ചെയ്തിരിക്കുന്നത് .",
         options: ["3 മാത്രം ശരിയാണ്", "1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
         ans: 0,
-        exp: "പ്രസ്താവന 1 തെറ്റാണ് (പ്രൊജക്ട് എലിഫന്റ് 1992-ലാണ് ആരംഭിച്ചത്; 1972-ൽ വൈൽഡ്‌ലൈഫ് പ്രൊട്ടക്ഷൻ ആക്ട് ആണ്)[cite: 14]. പ്രസ്താവന 2 തെറ്റാണ്[cite: 14]. പ്രസ്താവന 3 ശരിയാണ് (ആനയിറങ്ങൽ-ചിന്നക്കനാൽ മേഖലയിലാണ് ആദ്യ കാട്ടാന ഉദ്യാനം വിഭാവനം ചെയ്തിരിക്കുന്നത്)[cite: 14]."
+        exp: "പ്രസ്താവന 1 തെറ്റാണ് (പ്രൊജക്ട് എലിഫന്റ് 1992-ലാണ് ആരംഭിച്ചത്; 1972-ൽ വൈൽഡ്‌ലൈഫ് പ്രൊട്ടക്ഷൻ ആക്ട് ആണ്). പ്രസ്താവന 2 തെറ്റാണ്. പ്രസ്താവന 3 ശരിയാണ് (ആനയിറങ്ങൽ-ചിന്നക്കനാൽ മേഖലയിലാണ് ആദ്യ കാട്ടാന ഉദ്യാനം വിഭാവനം ചെയ്തിരിക്കുന്നത്)."
       },
       {
         q: "കേരളത്തിലെ ഏറ്റവും വലിയ ജലസേചന പദ്ധതിയായ കല്ലട ഇറിഗേഷൻ പ്രൊജക്ട് (KIP) സ്ഥിതി ചെയ്യുന്നത് ഏത് ജില്ലയിലാണ്?",
         options: ["കൊല്ലം", "പത്തനംതിട്ട", "തൃശ്ശൂർ", "പാലക്കാട്"],
         ans: 0,
-        exp: "കൊല്ലം ജില്ലയിലെ തെന്മലയിൽ കല്ലടയാറിന് കുറുകെ നിർമ്മിച്ചിരിക്കുന്ന പരപ്പാർ ഡാം അടിസ്ഥാനമാക്കിയുള്ളതാണ് കേരളത്തിലെ ഏറ്റവും വലിയ ജലസേചന പദ്ധതിയായ കല്ലട പദ്ധതി[cite: 14]."
+        exp: "കൊല്ലം ജില്ലയിലെ തെന്മലയിൽ കല്ലടയാറിന് കുറുകെ നിർമ്മിച്ചിരിക്കുന്ന പരപ്പാർ ഡാം അടിസ്ഥാനമാക്കിയുള്ളതാണ് കേരളത്തിലെ ഏറ്റവും വലിയ ജലസേചന പദ്ധതിയായ കല്ലട പദ്ധതി."
       },
       {
         q: "കേരളത്തിലെ വിവിധ നദികളെയും പ്രദേശങ്ങളെയും സംബന്ധിച്ച താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. കണ്ണൂർ ജില്ലയിലെ ധർമ്മടം തുരുത്ത് സ്ഥിതി ചെയ്യുന്നത് അഞ്ചരക്കണ്ടി പുഴയിലാണ് .\n2. പ്രശസ്തമായ ആറ്റുകാൽ ഭഗവതി ക്ഷേത്രം സ്ഥിതി ചെയ്യുന്നത് കിള്ളിയാറിന്റെ തീരത്താണ് .\n3. ചെങ്കോട്ടയിലേക്കുള്ള ആര്യങ്കാവ് ചുരം സ്ഥിതി ചെയ്യുന്നത് ചാലക്കുടിപ്പുഴയുടെ തീരത്താണ് .",
         options: ["1 മാത്രം തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "2, 3 തെറ്റാണ്", "എല്ലാം തെറ്റാണ്"],
         ans: 1,
-        exp: "പ്രസ്താവന 3 തെറ്റാണ്[cite: 14]. ആര്യങ്കാവ് ചുരം കൊല്ലം ജില്ലയിൽ കല്ലടയാറിന്റെ തീരപ്രദേശങ്ങളുമായി ബന്ധപ്പെട്ട ദേശീയപാത 744-ലാണ് (ചാലക്കുടിപ്പുഴ തൃശ്ശൂരിലാണ്)[cite: 14]. 1, 2 പ്രസ്താവനകൾ ശരിയാണ്[cite: 14]."
+        exp: "പ്രസ്താവന 3 തെറ്റാണ്. ആര്യങ്കാവ് ചുരം കൊല്ലം ജില്ലയിൽ കല്ലടയാറിന്റെ തീരപ്രദേശങ്ങളുമായി ബന്ധപ്പെട്ട ദേശീയപാത 744-ലാണ് (ചാലക്കുടിപ്പുഴ തൃശ്ശൂരിലാണ്). 1, 2 പ്രസ്താവനകൾ ശരിയാണ്."
       },
       {
         q: "വംശനാശഭീഷണി നേരിടുന്ന വരയാടുകളെ സംരക്ഷിക്കുന്നതിനായി മൂന്നാർ ഡിവിഷനിൽ നടത്തിയ സംയോജിത സെൻസസ് പ്രകാരം കണ്ടെത്തിയ വരയാടുകളുടെ ആകെ എണ്ണം എത്രയാണ്?",
         options: ["520", "827", "1250", "640"],
         ans: 1,
-        exp: "മൂന്നാർ വൈൽഡ്‌ലൈഫ് ഡിവിഷന്റെ നേതൃത്വത്തിൽ നടന്ന വരയാട് (Nilgiri Tahr) സെൻസസ് പ്രകാരം കണ്ടെത്തിയ ആകെ വരയാടുകളുടെ എണ്ണം 827 ആണ്[cite: 14]."
+        exp: "മൂന്നാർ വൈൽഡ്‌ലൈഫ് ഡിവിഷന്റെ നേതൃത്വത്തിൽ നടന്ന വരയാട് (Nilgiri Tahr) സെൻസസ് പ്രകാരം കണ്ടെത്തിയ ആകെ വരയാടുകളുടെ എണ്ണം 827 ആണ്."
       },
       {
         q: "കേരളത്തിലെ പ്രകൃതിദുരന്ത നിവാരണവും വന്യജീവി സംഘർഷവുമായി ബന്ധപ്പെട്ട പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. ജനവാസ മേഖലകളിൽ ഇറങ്ങിയ 'അരിക്കൊമ്പൻ' എന്ന കാട്ടാനയെ മയക്കുവെടി വെച്ച് പിടികൂടി തുറന്നുവിട്ടത് പെരിയാർ ടൈഗർ റിസർവിലാണ് .\n2. വന്യജീവി ആക്രമണങ്ങൾ തടയുന്നതിനായി കേരളവും കർണാടകയും തമ്മിൽ സംയുക്ത സഹകരണ കരാറിൽ ഒപ്പുവെച്ചു .\n3. വനം വികസന ഏജൻസികളിലെയും ഇക്കോ ടൂറിസം കേന്ദ്രങ്ങളിലെയും ക്രമക്കേടുകൾ തടയാൻ വിജിലൻസ് നടത്തിയ മിന്നൽ പരിശോധനയാണ് 'ഓപ്പറേഷൻ ജംഗിൾ സഫാരി' .",
         options: ["1, 2 ശരിയാണ്", "2, 3 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "1, 2, 3 ശരിയാണ്"],
         ans: 3,
-        exp: "നൽകിയിട്ടുള്ള മൂന്ന് പ്രസ്താവനകളും സമകാലിക വനം-പരിസ്ഥിതി സംഭവങ്ങളുമായി ബന്ധപ്പെട്ട് പൂർണ്ണമായും ശരിയാണ്[cite: 14]."
+        exp: "നൽകിയിട്ടുള്ള മൂന്ന് പ്രസ്താവനകളും സമകാലിക വനം-പരിസ്ഥിതി സംഭവങ്ങളുമായി ബന്ധപ്പെട്ട് പൂർണ്ണമായും ശരിയാണ്."
       },
       {
         q: "കേരളത്തിലെ ആദ്യത്തെ വനം മ്യൂസിയം (Forestry Museum) സ്ഥാപിതമായ സ്ഥലം ഏതാണ്?",
         options: ["നിലമ്പൂർ", "കോന്നി", "കുളത്തുപ്പുഴ", "പീച്ചി"],
         ans: 2,
-        exp: "കൊല്ലം ജില്ലയിലെ കുളത്തുപ്പുഴയിലാണ് കേരളത്തിലെ ആദ്യത്തെ ഫോറസ്ട്രി മ്യൂസിയം പ്രവർത്തനം ആരംഭിച്ചത്[cite: 14]."
+        exp: "കൊല്ലം ജില്ലയിലെ കുളത്തുപ്പുഴയിലാണ് കേരളത്തിലെ ആദ്യത്തെ ഫോറസ്ട്രി മ്യൂസിയം പ്രവർത്തനം ആരംഭിച്ചത്."
       },
       {
         q: "നെയ്യാർ വന്യജീവി സങ്കേതത്തിലെ ജീവിവർഗ്ഗങ്ങളെക്കുറിച്ചുള്ള പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. ഹിമാലയൻ കസ്തൂരിമാനുകൾ ഏറ്റവും കൂടുതൽ പ്രജനനം നടത്തുന്ന കേന്ദ്രമാണിത് .\n2. മുതലകളെ സംരക്ഷിക്കുന്നതിനായി സ്റ്റീവ് ഇർവിന്റെ പേരിൽ മുതല വളർത്തൽ കേന്ദ്രം ഇവിടെ പ്രവർത്തിക്കുന്നു .\n3. ഹിമക്കരടികളെ സംരക്ഷിക്കുന്ന ഇന്ത്യയിലെ ഏക ദേശീയോദ്യാനമാണിത് .",
         options: ["2 മാത്രം തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
         ans: 2,
-        exp: "പ്രസ്താവന 1 ഉം 3 ഉം അബദ്ധജഡിലവും തെറ്റുമാണ്[cite: 14]. കസ്തൂരിമാനുകളോ ഹിമക്കരടികളോ ഉഷ്ണമേഖലാ പ്രദേശമായ നെയ്യാറിലില്ല[cite: 14]. സ്റ്റീവ് ഇർവിൻ ക്രോക്കഡൈൽ പാർക്ക് നെയ്യാറിലാണ് (പ്രസ്താവന 2 ശരിയാണ്)[cite: 14]."
+        exp: "പ്രസ്താവന 1 ഉം 3 ഉം അബദ്ധജഡിലവും തെറ്റുമാണ്. കസ്തൂരിമാനുകളോ ഹിമക്കരടികളോ ഉഷ്ണമേഖലാ പ്രദേശമായ നെയ്യാറിലില്ല. സ്റ്റീവ് ഇർവിൻ ക്രോക്കഡൈൽ പാർക്ക് നെയ്യാറിലാണ് (പ്രസ്താവന 2 ശരിയാണ്)."
       },
       {
         q: "സംസ്ഥാനത്തെ ഏറ്റവും വലിയ സുവോളജിക്കൽ പാർക്ക് നിലവിൽ വരുന്നത് തൃശ്ശൂർ ജില്ലയിലെ ഏത് പ്രദേശത്താണ്?",
         options: ["ചാലക്കുടി", "ഒല്ലൂർ", "മണ്ണുത്തി", "പുത്തൂർ"],
         ans: 3,
-        exp: "തൃശ്ശൂർ പുത്തൂരിലാണ് അന്താരാഷ്ട്ര നിലവാരത്തിലുള്ള പുത്തൂർ സുവോളജിക്കൽ പാർക്ക് (Puthur Zoological Park) സ്ഥാപിച്ചിട്ടുള്ളത്[cite: 14]."
+        exp: "തൃശ്ശൂർ പുത്തൂരിലാണ് അന്താരാഷ്ട്ര നിലവാരത്തിലുള്ള പുത്തൂർ സുവോളജിക്കൽ പാർക്ക് (Puthur Zoological Park) സ്ഥാപിച്ചിട്ടുള്ളത്."
       },
       {
         q: "കേരളത്തിലെ നദികളെക്കുറിച്ചുള്ള ചരിത്ര-സാഹിത്യ പരാമർശങ്ങളിൽ ശരിയായവ ഏവ?\n1. എം.ടി. വാസുദേവൻ നായരുടെ സാഹിത്യ സൃഷ്ടികളിൽ അനശ്വരമായ നദി ഭാരതപ്പുഴയാണ് .\n2. വില്യം ലോഗന്റെ മലബാർ മാന്വലിൽ പരാമർശിച്ചിരിക്കുന്ന പ്രധാന നദി പമ്പാനദിയാണ് .\n3. എം. മുകുന്ദന്റെ 'മയ്യഴിപ്പുഴയുടെ തീരങ്ങളിൽ' എന്ന നോവലിലെ നദി ചാലിയാറാണ് .",
         options: ["1, 2 ശരിയാണ്", "1 മാത്രം ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
         ans: 1,
-        exp: "പ്രസ്താവന 1 മാത്രം ശരിയാണ് (എം.ടി - നിളയുടെ കഥാകാരൻ)[cite: 14]. പ്രസ്താവന 2 തെറ്റാണ് (മലബാർ മാന്വലിൽ കോരപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്)[cite: 14]. പ്രസ്താവന 3 തെറ്റാണ് (മയ്യഴിപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്)[cite: 14]."
+        exp: "പ്രസ്താവന 1 മാത്രം ശരിയാണ് (എം.ടി - നിളയുടെ കഥാകാരൻ). പ്രസ്താവന 2 തെറ്റാണ് (മലബാർ മാന്വലിൽ കോരപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്). പ്രസ്താവന 3 തെറ്റാണ് (മയ്യഴിപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്)."
       },
       {
         q: "ലണ്ടനിലെ നാച്ചുറൽ ഹിസ്റ്ററി മ്യൂസിയം നൽകുന്ന അന്താരാഷ്ട്ര വന്യജീവി ഫോട്ടോഗ്രാഫി അവാർഡ് (Wildlife Photographer of the Year) നേടിയ മലയാളി ആരാണ്?",
         options: ["വിഷ്ണു ഗോപാൽ", "ബാലൻ മാധവൻ", "എൻ.എ. നസീർ", "സുരേഷ് ഇളമൺ"],
         ans: 0,
-        exp: "ലണ്ടൻ നാച്ചുറൽ ഹിസ്റ്ററി മ്യൂസിയത്തിന്റെ പ്രശസ്തമായ വൈൽഡ്‌ലൈഫ് ഫോട്ടോഗ്രാഫർ പുരസ്കാരം കരസ്ഥമാക്കിയ മലയാളി ഫോട്ടോഗ്രാഫറാണ് വിഷ്ണു ഗോപാൽ[cite: 14]."
+        exp: "ലണ്ടൻ നാച്ചുറൽ ഹിസ്റ്ററി മ്യൂസിയത്തിന്റെ പ്രശസ്തമായ വൈൽഡ്‌ലൈഫ് ഫോട്ടോഗ്രാഫർ പുരസ്കാരം കരസ്ഥമാക്കിയ മലയാളി ഫോട്ടോഗ്രാഫറാണ് വിഷ്ണു ഗോപാൽ."
       }
     ];
 
@@ -452,12 +451,16 @@
     const quizScreen = document.getElementById('quizScreen');
     const resultScreen = document.getElementById('resultScreen');
 
+    function cleanTitleForMatch(str) {
+      if (!str) return "";
+      return String(str).replace(/[\s\-_,.:;()\/\\|\[\]]+/g, '').toLowerCase();
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const passedName = urlParams.get('name');
       const passedPhone = urlParams.get('phone');
       const passedTitle = urlParams.get('title');
-      const passedSheet = urlParams.get('sheetUrl');
       const passedPdf = urlParams.get('pdfUrl');
 
       if (passedName && passedName.trim() !== '') {
@@ -465,9 +468,7 @@
       } else {
         try {
           const storedUser = localStorage.getItem('sk_user_name');
-          if (storedUser && storedUser.trim() !== '') {
-            currentUser.name = storedUser.trim();
-          }
+          if (storedUser && storedUser.trim() !== '') currentUser.name = storedUser.trim();
         } catch (e) {}
       }
 
@@ -480,7 +481,6 @@
         document.getElementById('pdfExportExamTitle').innerText = `${examTitle} - ഉത്തര സൂചിക`;
       }
       
-      if (passedSheet) GOOGLE_SHEET_WEBAPP_URL = decodeURIComponent(passedSheet);
       if (passedPdf) ORIGINAL_PDF_URL = decodeURIComponent(passedPdf);
 
       const displayElem = document.getElementById('displayUser');
@@ -503,78 +503,64 @@
                            urlParams.get('view') === 'solution';
 
       if (isReviewMode) {
-        if (motivationScreen) {
-          motivationScreen.classList.add('hidden');
-          motivationScreen.style.setProperty('display', 'none', 'important');
-        }
-
-        if (quizScreen) {
-          quizScreen.classList.add('hidden');
-          quizScreen.classList.remove('flex');
-          quizScreen.style.setProperty('display', 'none', 'important');
-        }
-
-        if (resultScreen) {
-          resultScreen.classList.remove('hidden');
-          resultScreen.style.setProperty('display', 'block', 'important');
-        }
-
-        let prevScore = urlParams.get('score');
-        let prevCorrect = urlParams.get('correct');
-        let prevWrong = urlParams.get('wrong');
-        let prevSkipped = urlParams.get('skipped');
-
-        if ((!prevScore || prevScore === "0.00" || prevScore === "0") && currentUser.phone) {
-          try {
-            const histKey = `sk_history_${currentUser.phone}`;
-            const history = JSON.parse(localStorage.getItem(histKey) || '[]');
-            const matched = history.slice().reverse().find(h => 
-              h.title === examTitle || 
-              h.title === QUIZ_SHEET_NAME ||
-              (h.title && (h.title.includes("നദീതടങ്ങൾ") || h.title.includes("ജലസേചനം")))
-            );
-            if (matched) {
-              prevScore = matched.score;
-              prevCorrect = matched.correct;
-              prevWrong = matched.wrong;
-              prevSkipped = matched.skipped;
-            }
-          } catch(e) {}
-        }
-
-        document.getElementById('resultHeaderTitle').innerText = "കഴിഞ്ഞ പരീക്ഷാ ഫലം & ഉത്തര സൂചിക";
-        document.getElementById('finalScore').innerText = prevScore !== null ? Number(prevScore).toFixed(2) : "0.00";
-        document.getElementById('correctCount').innerText = prevCorrect !== null ? prevCorrect : "0";
-        document.getElementById('wrongCount').innerText = prevWrong !== null ? prevWrong : "0";
-        document.getElementById('skipCount').innerText = prevSkipped !== null ? prevSkipped : "0";
-
-        const statusElem = document.getElementById('sheetStatus');
-        if (statusElem) statusElem.style.display = 'none';
-
-        const subBadge = document.getElementById('resultSubBadge');
-        if (subBadge) subBadge.innerText = "✓ നിങ്ങൾ മുമ്പ് പൂർത്തിയാക്കിയ പരീക്ഷയുടെ ഉത്തരസൂചിക താഴെ നൽകിയിരിക്കുന്നു";
-
-        const badge = document.getElementById('scoreMotivationBadge');
-        if (badge) {
-          badge.className = "max-w-xl mx-auto p-4 rounded-2xl border border-cyan-500/60 bg-cyan-950/40 text-cyan-300";
-          badge.innerHTML = `📖 <strong>മുൻപത്തെ സ്കോർ അവലോകനം</strong> (Previous Attempt Review Mode)`;
-        }
-
-        renderReviewOnlySolutions();
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100);
+        motivationScreen.style.setProperty('display', 'none', 'important');
+        quizScreen.style.setProperty('display', 'none', 'important');
+        resultScreen.classList.remove('hidden');
+        resultScreen.style.setProperty('display', 'block', 'important');
+        loadPreviousAttemptFromFirebase();
         return;
       }
     });
 
+    // 🌟 ഫയർബേസിൽ നിന്ന് മുൻപത്തെ അറ്റംപ്റ്റ് എടുത്തു കാണിക്കുന്നു
+    async function loadPreviousAttemptFromFirebase() {
+      let prevScore = 0, prevCorrect = 0, prevWrong = 0, prevSkipped = 0;
+
+      if (currentUser.phone && currentUser.phone !== "0000000000") {
+        try {
+          const res = await fetch(`${FIREBASE_DB_URL}/users_history/${currentUser.phone}.json`);
+          const data = await res.json();
+          if (data) {
+            const hList = Object.values(data);
+            const cleanT = cleanTitleForMatch(examTitle);
+            const matched = hList.slice().reverse().find(h => cleanTitleForMatch(h.title) === cleanT);
+            if (matched) {
+              prevScore = Number(matched.score || 0);
+              prevCorrect = matched.correct || 0;
+              prevWrong = matched.wrong || 0;
+              prevSkipped = matched.skipped || 0;
+            }
+          }
+        } catch(e) {}
+      }
+
+      document.getElementById('resultHeaderTitle').innerText = "കഴിഞ്ഞ പരീക്ഷാ ഫലം & ഉത്തര സൂചിക";
+      document.getElementById('finalScore').innerText = prevScore.toFixed(2);
+      document.getElementById('correctCount').innerText = prevCorrect;
+      document.getElementById('wrongCount').innerText = prevWrong;
+      document.getElementById('skipCount').innerText = prevSkipped;
+
+      const statusElem = document.getElementById('sheetStatus');
+      if (statusElem) statusElem.style.display = 'none';
+
+      const subBadge = document.getElementById('resultSubBadge');
+      if (subBadge) subBadge.innerText = "✓ നിങ്ങൾ മുമ്പ് പൂർത്തിയാക്കിയ പരീക്ഷയുടെ ഉത്തരസൂചിക താഴെ നൽകിയിരിക്കുന്നു";
+
+      const badge = document.getElementById('scoreMotivationBadge');
+      if (badge) {
+        badge.className = "max-w-xl mx-auto p-4 rounded-2xl border border-cyan-500/60 bg-cyan-950/40 text-cyan-300";
+        badge.innerHTML = `📖 <strong>മുൻപത്തെ സ്കോർ അവലോകനം</strong> (Previous Attempt Review Mode)`;
+      }
+
+      renderReviewOnlySolutions();
+      setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 100);
+    }
+
     document.getElementById('fullscreenToggleBtn').onclick = () => {
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-          alert(`Error attempting full-screen: ${err.message}`);
-        });
+        document.documentElement.requestFullscreen().catch(err => alert(`Error: ${err.message}`));
       } else {
-        if (document.exitFullscreen) { document.exitFullscreen(); }
+        if (document.exitFullscreen) document.exitFullscreen();
       }
     };
 
@@ -594,7 +580,6 @@
     }
 
     function startExamDirectly() {
-      motivationScreen.classList.add('hidden');
       motivationScreen.style.setProperty('display', 'none', 'important');
       quizScreen.classList.remove('hidden');
       quizScreen.classList.add('flex');
@@ -616,9 +601,7 @@
         timeLeft--;
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
-        const mStr = minutes < 10 ? '0' + minutes : minutes;
-        const sStr = seconds < 10 ? '0' + seconds : seconds;
-        timerDisplay.innerText = `${mStr}:${sStr}`;
+        timerDisplay.innerText = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 
         if (timeLeft <= 180) {
           timerDisplay.classList.remove('text-cyan-400');
@@ -670,11 +653,29 @@
       handleReportQuestion(currentIndex + 1);
     });
 
-    function handleReportQuestion(qNum) {
+    // 🌟 ചോദ്യത്തിലെ സംശയം നേരിട്ട് ഫയർബേസിലേക്ക് റിപ്പോർട്ട് ചെയ്യുന്നു
+    async function handleReportQuestion(qNum) {
       const reason = prompt(`ചോദ്യം ${qNum} ൽ എന്തെങ്കിലും തെറ്റുകൾ ഉണ്ടെങ്കിൽ ദയവായി താഴെ രേഖപ്പെടുത്തുക:`);
       if (reason && reason.trim()) {
-        sendReportQuestionToGoogleSheet(qNum, reason.trim());
-        alert(`നന്ദി! ചോദ്യം ${qNum} ലെ സംശയം വിജയകരമായി റിപ്പോർട്ട് ചെയ്തിരിക്കുന്നു.`);
+        try {
+          await fetch(`${FIREBASE_DB_URL}/reported_questions.json`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              exam: examTitle,
+              question: `ചോദ്യം ${qNum}`,
+              questionNumber: qNum,
+              reason: reason.trim(),
+              candidate: currentUser.name,
+              phone: currentUser.phone,
+              date: new Date().toISOString().split('T')[0],
+              timestamp: Date.now()
+            })
+          });
+          alert(`നന്ദി! ചോദ്യം ${qNum} ലെ സംശയം അഡ്മിൻ പാനലിലേക്ക് വിജയകരമായി റിപ്പോർട്ട് ചെയ്തു.`);
+        } catch (e) {
+          alert('റിപ്പോർട്ട് ചെയ്യുന്നതിൽ തടസ്സം നേരിട്ടു.');
+        }
       }
     }
 
@@ -707,12 +708,8 @@
     }
 
     document.getElementById('nextBtn').onclick = () => {
-      if (currentIndex < questionsData.length - 1) {
-        currentIndex++;
-        renderQuestion(currentIndex);
-      } else {
-        finishExam();
-      }
+      if (currentIndex < questionsData.length - 1) { currentIndex++; renderQuestion(currentIndex); }
+      else { finishExam(); }
     };
 
     document.getElementById('prevBtn').onclick = () => {
@@ -721,12 +718,8 @@
 
     document.getElementById('skipBtn').onclick = () => {
       userAnswers[currentIndex] = null;
-      if (currentIndex < questionsData.length - 1) {
-        currentIndex++;
-        renderQuestion(currentIndex);
-      } else {
-        finishExam();
-      }
+      if (currentIndex < questionsData.length - 1) { currentIndex++; renderQuestion(currentIndex); }
+      else { finishExam(); }
     };
 
     document.getElementById('finishMidBtn').onclick = () => {
@@ -780,25 +773,6 @@
         badge.innerHTML = `💪 <strong>തളരരുത്!</strong> നോട്ട്സുകൾ കൂടുതൽ ആഴത്തിൽ പഠിച്ച് വീണ്ടും പരിശീലിക്കുക.`;
       }
 
-      try {
-        if (currentUser && currentUser.phone && currentUser.phone !== "0000000000") {
-          const historyKey = `sk_history_${currentUser.phone}`;
-          let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-          
-          history = history.filter(h => !(h.title && (h.title === examTitle || h.title === QUIZ_SHEET_NAME)));
-          history.push({
-            title: examTitle,
-            sheetName: QUIZ_SHEET_NAME,
-            score: formattedScore,
-            correct: correct,
-            wrong: wrong,
-            skipped: skipped,
-            date: new Date().toLocaleDateString('ml-IN', { day: 'numeric', month: 'short', year: 'numeric' })
-          });
-          localStorage.setItem(historyKey, JSON.stringify(history));
-        }
-      } catch (err) {}
-
       const downloadBtn = document.getElementById('downloadOriginalNoteBtn');
       const lockNotice = document.getElementById('pdfLockNotice');
 
@@ -820,16 +794,60 @@
       resultScreen.style.setProperty('display', 'block', 'important');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      sendResultToGoogleSheet({
+      sendResultToFirebase({
         name: currentUser.name,
         phone: currentUser.phone,
-        score: formattedScore,
+        score: scoreNum,
         correct: correct,
         wrong: wrong,
-        skipped: skipped,
-        wrongQuestions: wrongQuestionsList,
-        wrongQuestionsArray: wrongQuestionsList
+        skipped: skipped
       });
+    }
+
+    // 🌟 ഫയർബേസിലേക്ക് മാർക്കുകൾ തത്സമയം സേവ് ചെയ്യുന്നു
+    async function sendResultToFirebase(payload) {
+      const statusDiv = document.getElementById('sheetStatus');
+      if (!payload.phone || payload.phone === "0000000000") {
+        statusDiv.innerText = "✓ മാർക്ക് സ്ക്രീനിൽ ലഭ്യമാണ് (ലോഗിൻ ചെയ്തിട്ടില്ല).";
+        statusDiv.classList.remove('animate-pulse');
+        return;
+      }
+
+      const cleanExamKey = cleanTitleForMatch(examTitle);
+      const todayDate = new Date().toISOString().split('T')[0];
+
+      try {
+        await fetch(`${FIREBASE_DB_URL}/ranks/${cleanExamKey}/${payload.phone}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: payload.name,
+            phone: payload.phone,
+            score: payload.score,
+            date: todayDate
+          })
+        });
+
+        await fetch(`${FIREBASE_DB_URL}/users_history/${payload.phone}.json`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: examTitle,
+            score: payload.score,
+            correct: payload.correct,
+            wrong: payload.wrong,
+            skipped: payload.skipped,
+            date: todayDate,
+            timestamp: Date.now()
+          })
+        });
+
+        statusDiv.innerText = "✓ മാർക്ക് ഫയർബേസിൽ വിജയകരമായി രേഖപ്പെടുത്തി!";
+        statusDiv.className = "text-xs text-emerald-400 mb-4";
+      } catch (err) {
+        statusDiv.innerText = "ഡാറ്റ സേവ് ചെയ്യുന്നതിൽ ചെറിയ തടസ്സം നേരിട്ടു.";
+        statusDiv.className = "text-xs text-rose-400 mb-4";
+      }
     }
 
     function setupClickableReviewCards() {
@@ -920,74 +938,28 @@
       document.getElementById('filterReviewArea').classList.add('hidden');
     };
 
-    function openFeedbackModal() {
-      document.getElementById('feedbackModal').classList.remove('hidden');
-    }
+    function openFeedbackModal() { document.getElementById('feedbackModal').classList.remove('hidden'); }
 
-    function recordFeedbackAndOpenDownload(feedbackVal) {
+    // 🌟 ഫീഡ്ബാക്ക് ഫയർബേസിലേക്ക് അയക്കുന്നു
+    async function recordFeedbackAndOpenDownload(feedbackVal) {
       document.getElementById('feedbackModal').classList.add('hidden');
-      sendFeedbackToGoogleSheet(currentUser.phone, feedbackVal);
-      if (ORIGINAL_PDF_URL) {
-        window.open(ORIGINAL_PDF_URL, '_blank');
-      } else {
-        alert('ഔദ്യോഗിക PDF ലിങ്ക് ഉടൻ ലഭ്യമാക്കുന്നതാണ്.');
+      if (currentUser.phone && currentUser.phone !== "0000000000") {
+        try {
+          await fetch(`${FIREBASE_DB_URL}/feedbacks.json`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              exam: examTitle,
+              phone: currentUser.phone,
+              name: currentUser.name,
+              feedback: feedbackVal,
+              date: new Date().toISOString().split('T')[0]
+            })
+          });
+        } catch (e) {}
       }
-    }
-
-    function sendResultToGoogleSheet(payload) {
-      const statusDiv = document.getElementById('sheetStatus');
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("YOUR_APPS_SCRIPT_WEBAPP_URL_HERE")) {
-        statusDiv.innerText = "Google Sheet ലിങ്ക് നൽകിയിട്ടില്ല (മാർക്ക് മുകളിൽ ലഭ്യമാണ്).";
-        statusDiv.classList.remove('animate-pulse');
-        return;
-      }
-
-      payload.sheetName = QUIZ_SHEET_NAME;
-
-      fetch(GOOGLE_SHEET_WEBAPP_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(() => {
-        statusDiv.innerText = `✓ മാർക്ക് '${QUIZ_SHEET_NAME}' എന്ന ഷീറ്റ് ടാബിലേക്ക് രേഖപ്പെടുത്തി!`;
-        statusDiv.className = "text-xs text-cyan-400 mb-4";
-      })
-      .catch(() => {
-        statusDiv.innerText = "ഡാറ്റ സേവ് ചെയ്യുന്നതിൽ ചെറിയ തടസ്സം നേരിട്ടു.";
-        statusDiv.className = "text-xs text-rose-400 mb-4";
-      });
-    }
-
-    function sendReportQuestionToGoogleSheet(qNum, reason) {
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("YOUR_APPS_SCRIPT_WEBAPP_URL_HERE")) return;
-      fetch(GOOGLE_SHEET_WEBAPP_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: "report_question",
-          sheetName: QUIZ_SHEET_NAME,
-          questionNumber: qNum,
-          reason: reason
-        })
-      });
-    }
-
-    function sendFeedbackToGoogleSheet(phone, feedback) {
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("YOUR_APPS_SCRIPT_WEBAPP_URL_HERE")) return;
-      fetch(GOOGLE_SHEET_WEBAPP_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: "submit_feedback",
-          sheetName: QUIZ_SHEET_NAME,
-          phone: phone,
-          feedback: feedback
-        })
-      });
+      if (ORIGINAL_PDF_URL) window.open(ORIGINAL_PDF_URL, '_blank');
+      else alert('ഔദ്യോഗിക PDF ലിങ്ക് ഉടൻ ലഭ്യമാക്കുന്നതാണ്.');
     }
 
     function renderReviewOnlySolutions() {
@@ -1117,7 +1089,8 @@
       });
     });
 
-    function fetchLiveLeaderboard() {
+    // 🌟 ഫയർബേസിൽ നിന്ന് ലൈവ് റാങ്ക് ലിസ്റ്റ് എടുത്തു കാണിക്കുന്നു
+    async function fetchLiveLeaderboard() {
       const modal = document.getElementById('leaderboardModal');
       const loader = document.getElementById('leaderboardLoading');
       const wrapper = document.getElementById('leaderboardTableWrapper');
@@ -1128,73 +1101,40 @@
       wrapper.classList.add('hidden');
       tbody.innerHTML = '';
 
-      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("YOUR_APPS_SCRIPT_WEBAPP_URL_HERE")) {
-        loader.innerText = "Google Apps Script URL സെറ്റ് ചെയ്തിട്ടില്ല.";
-        return;
-      }
+      const cleanKey = cleanTitleForMatch(examTitle);
 
-      fetch(`${GOOGLE_SHEET_WEBAPP_URL}?sheet=${encodeURIComponent(QUIZ_SHEET_NAME)}&_t=${Date.now()}`)
-        .then(res => res.json())
-        .then(data => {
-          loader.classList.add('hidden');
-          wrapper.classList.remove('hidden');
+      try {
+        const res = await fetch(`${FIREBASE_DB_URL}/ranks/${cleanKey}.json`);
+        const data = await res.json();
+        loader.classList.add('hidden');
+        wrapper.classList.remove('hidden');
 
-          const rawList = Array.isArray(data) ? data : (data.leaderboard || []);
+        if (!data) {
+          tbody.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-slate-500">ഇതുവരെ ആരും പരീക്ഷ പൂർത്തിയാക്കിയിട്ടില്ല.</td></tr>';
+          return;
+        }
 
-          if (!rawList || rawList.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="py-6 text-center text-slate-500">ഇതുവരെ ആരും പരീക്ഷ പൂർത്തിയാക്കിയിട്ടില്ല.</td></tr>';
-            return;
-          }
+        let ranks = Object.values(data);
+        ranks.sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
 
-          const seenPhones = new Set();
-          const uniqueLeaderboard = [];
+        ranks.forEach((entry, idx) => {
+          let phoneStr = String(entry.phone || '').replace(/[^0-9]/g, '');
+          if (phoneStr.length >= 10) phoneStr = phoneStr.slice(-10);
+          const masked = (phoneStr && phoneStr.length >= 5) ? phoneStr.substring(0, 5) + '*****' : '---';
 
-          rawList.forEach((entry, index) => {
-            let cleanPhone = String(entry.phone || '').replace(/[^0-9]/g, '');
-            if (cleanPhone.length >= 10) {
-              cleanPhone = cleanPhone.slice(-10);
-            }
-
-            if (cleanPhone && cleanPhone !== "0000000000") {
-              if (!seenPhones.has(cleanPhone)) {
-                seenPhones.add(cleanPhone);
-                entry.originalIndex = index;
-                uniqueLeaderboard.push(entry);
-              }
-            } else {
-              entry.originalIndex = index;
-              uniqueLeaderboard.push(entry);
-            }
-          });
-
-          uniqueLeaderboard.sort((a, b) => {
-            const scoreDiff = parseFloat(b.score) - parseFloat(a.score);
-            if (scoreDiff !== 0) return scoreDiff;
-            return a.originalIndex - b.originalIndex;
-          });
-
-          uniqueLeaderboard.forEach((entry, idx) => {
-            let phoneStr = String(entry.phone || '').replace(/[^0-9]/g, '');
-            if (phoneStr.length >= 10) phoneStr = phoneStr.slice(-10);
-            
-            const masked = (phoneStr && phoneStr.length >= 5) 
-              ? phoneStr.substring(0, 5) + '*****' 
-              : '---';
-
-            const row = document.createElement('tr');
-            row.className = 'hover:bg-slate-700/30 text-slate-300';
-            row.innerHTML = `
-              <td class="py-2.5 px-3 font-mono font-bold">${idx + 1}</td>
-              <td class="py-2.5 px-3 font-medium">${entry.name}</td>
-              <td class="py-2.5 px-3 font-mono text-xs text-slate-400">${masked}</td>
-              <td class="py-2.5 px-3 text-right font-mono font-bold text-cyan-400">${Number(entry.score).toFixed(2)}</td>
-            `;
-            tbody.appendChild(row);
-          });
-        })
-        .catch(() => {
-          loader.innerText = "റാങ്ക് ലിസ്റ്റ് ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി അല്പം കഴിഞ്ഞ് ശ്രമിക്കുക.";
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-700/30 text-slate-300';
+          row.innerHTML = `
+            <td class="py-2.5 px-3 font-mono font-bold">${idx + 1}</td>
+            <td class="py-2.5 px-3 font-medium">${entry.name || 'വിദ്യാർത്ഥി'}</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-400">${masked}</td>
+            <td class="py-2.5 px-3 text-right font-mono font-bold text-cyan-400">${Number(entry.score || 0).toFixed(2)}</td>
+          `;
+          tbody.appendChild(row);
         });
+      } catch (e) {
+        loader.innerText = "റാങ്ക് ലിസ്റ്റ് ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി അല്പം കഴിഞ്ഞ് ശ്രമിക്കുക.";
+      }
     }
 
     function closeLeaderboard() {
