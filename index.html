@@ -132,7 +132,7 @@
       <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl text-center space-y-5">
         
         <div class="flex justify-end">
-          <button type="button" onclick="returnToHomeWithData()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-xl text-xs transition shadow flex items-center space-x-1.5">
+          <button type="button" onclick="returnToHomeWithData()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-xl text-xs transition shadow flex items-center space-x-1.5 cursor-pointer">
             <span>🏠</span>
             <span>ഹോം പേജിലേക്ക് മടങ്ങുക (Save Result)</span>
           </button>
@@ -198,7 +198,7 @@
             📊 ലൈവ് റാങ്ക് ലിസ്റ്റ് കാണുക
           </button>
 
-          <button type="button" onclick="returnToHomeWithData()" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl text-sm transition flex items-center space-x-1.5">
+          <button type="button" onclick="returnToHomeWithData()" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl text-sm transition flex items-center space-x-1.5 cursor-pointer">
             <span>🏠</span>
             <span>ഹോം പോർട്ടൽ</span>
           </button>
@@ -277,6 +277,7 @@
     const FIREBASE_DB_URL = "https://sk-psc-portal-default-rtdb.asia-southeast1.firebasedatabase.app";
     let ORIGINAL_PDF_URL = "https://docs.google.com/document/d/YOUR_GOOGLE_DOC_ID/export?format=pdf";
     let examTitle = "നദീതടങ്ങൾ, ജലസേചനം സെറ്റ് 3";
+    let currentExamKey = "nadithadangal_jalasechanam_set_3";
 
     const questionsData = [
       {
@@ -287,7 +288,7 @@
       },
       {
         q: "കേരളത്തിലെ കാലാവസ്ഥാ വിഭാഗങ്ങളെയും കാറ്റുകളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കേരളത്തിൽ എത്തിച്ചേരുന്നത് സാധാരണയായി ഒക്ടോബർ മാസത്തിലാണ് .\n2. ഗ്രീക്ക് നാവികനായ ഹിപ്പാലസ് എ.ഡി. 45-ൽ മൺസൂൺ കാറ്റുകളുടെ ഗതിയും വേഗതയും കണ്ടെത്തി കടൽമാർഗ്ഗം കേരളത്തിലെത്തി .\n3. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കാറ്റുകൾ 'ഹിപ്പാലസ് കാറ്റുകൾ' എന്ന പേരിലും അറിയപ്പെടുന്നു .",
-        options: ["1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്", "1 മാത്രം ശരിയാണ്"],
+        options: ["1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്", "1 balance ശരിയാണ്"],
         ans: 2,
         exp: "പ്രസ്താവന 1 തെറ്റാണ്. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കേരളത്തിൽ ജൂൺ ആദ്യവാരത്തോടെയാണ് ആരംഭിക്കുന്നത്. 2, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
@@ -299,7 +300,7 @@
       },
       {
         q: "കേരളത്തിലെ കടുവ സംരക്ഷണ കേന്ദ്രങ്ങളെക്കുറിച്ചുള്ള താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. പെരിയാർ കടുവ സങ്കേതം ഇന്ത്യയിലെ പത്താമത്തെ ടൈഗർ റിസർവാണ് .\n2. കേരളത്തിലെ രണ്ടാമത്തെ കടുവ സംരക്ഷണ കേന്ദ്രമായ പറമ്പിക്കുളം തൃശ്ശൂർ ജില്ലയിലാണ് സ്ഥിതി ചെയ്യുന്നത് .\n3. 2010-ലാണ് പറമ്പിക്കുളത്തെ കടുവ സംരക്ഷണ കേന്ദ്രമായി ഔദ്യോഗികമായി കേന്ദ്രസർക്കാർ പ്രഖ്യാപിച്ചത് .",
-        options: ["2 മാത്രം തെറ്റാണ്", "1 മാത്രം തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "1, 3 തെറ്റാണ്"],
+        options: ["2 balance തെറ്റാണ്", "1 balance തെറ്റാണ്", "3 balance തെറ്റാണ്", "1, 3 തെറ്റാണ്"],
         ans: 0,
         exp: "പ്രസ്താവന 2 തെറ്റാണ്. പറമ്പിക്കുളം സ്ഥിതി ചെയ്യുന്നത് പാലക്കാട് ജില്ലയിലാണ് (തൃശ്ശൂരിലല്ല). 1, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
@@ -311,9 +312,9 @@
       },
       {
         q: "കേരളത്തിലെ കായലുകളിലേക്കും കടലിലേക്കും പതിക്കുന്ന നദികളെ സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. പരവൂർ കായലിൽ പതിക്കുന്ന പ്രധാന നദിയാണ് ഇത്തിക്കരയാർ .\n2. ഭാരതപ്പുഴ നേരിട്ട് വേമ്പനാട്ട് കായലിലാണ് പതിക്കുന്നത് .\n3. പമ്പാനദി അറബിക്കടലിലേക്ക് നേരിട്ടാണ് പതിക്കുന്നത്, കായലുകളുമായി ഇതിന് ബന്ധമില്ല .",
-        options: ["1, 2 ശരിയാണ്", "1 മാത്രം ശരിയാണ്", "2, 3 ശരിയാണ്", "3 മാത്രം ശരിയാണ്"],
+        options: ["1, 2 ശരിയാണ്", "1 balance ശരിയാണ്", "2, 3 ശരിയാണ്", "3 balance ശരിയാണ്"],
         ans: 1,
-        exp: "പ്രസ്താവന 1 മാത്രം ശരിയാണ്. പ്രസ്താവന 2 തെറ്റാണ് (ഭാരതപ്പുഴ പൊന്നാനിയിൽ അറബിക്കടലിലാണ് പതിക്കുന്നത്). പ്രസ്താവന 3 തെറ്റാണ് (പമ്പാനദി പതിക്കുന്നത് വേമ്പനാട്ട് കായലിലാണ്)."
+        exp: "പ്രസ്താവന 1 balance ശരിയാണ്. പ്രസ്താവന 2 തെറ്റാണ് (ഭാരതപ്പുഴ പൊന്നാനിയിൽ അറബിക്കടലിലാണ് പതിക്കുന്നത്). പ്രസ്താവന 3 തെറ്റാണ് (പമ്പാനദി പതിക്കുന്നത് വേമ്പനാട്ട് കായലിലാണ്)."
       },
       {
         q: "പ്രശസ്തമായ മാരാമൺ കൺവെൻഷനും ചെറുകോൽപ്പുഴ ഹിന്ദു മതസമ്മേളനവും നടക്കുന്നത് ഏത് നദിയുടെ മണപ്പുറത്താണ്?",
@@ -323,7 +324,7 @@
       },
       {
         q: "കേരളത്തിലെ പക്ഷിസങ്കേതങ്ങളെ സംബന്ധിച്ച താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. സലിം അലി പക്ഷിസങ്കേതം എന്നറിയപ്പെടുന്നത് എറണാകുളം ജില്ലയിലെ തട്ടേക്കാടാണ് .\n2. ഡോ. സലിം അലി രചിച്ച വിഖ്യാത ഗ്രന്ഥമാണ് 'കേരളത്തിലെ പക്ഷികൾ' .\n3. കുമരകം പക്ഷിസങ്കേതം പൂർണ്ണമായും കാട്ടാനകളുടെ സംരക്ഷണത്തിനായുള്ള കേന്ദ്രമാണ് .",
-        options: ["1 മാത്രം തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
+        options: ["1 balance തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
         ans: 3,
         exp: "പ്രസ്താവന 2 ഉം 3 ഉം തെറ്റാണ്. 'കേരളത്തിലെ പക്ഷികൾ' എന്ന ഗ്രന്ഥം രചിച്ചത് കെ.കെ. നീലകണ്ഠനാണ് (ഇന്ദുചൂഡൻ). കുമരകം വേമ്പനാട്ട് കായൽത്തീരത്തെ ദേശാടനപ്പക്ഷികളുടെ സങ്കേതമാണ് (കാട്ടാന സങ്കേതമല്ല). പ്രസ്താവന 1 ശരിയാണ്."
       },
@@ -335,7 +336,7 @@
       },
       {
         q: "കേരളത്തിലെ ചില പ്രധാന വെള്ളച്ചാട്ടങ്ങളെയും നദികളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. ചാലിയാറിന്റെ പോഷകനദിയായ ചാലിപ്പുഴയിലാണ് തുഷാരഗിരി വെള്ളച്ചാട്ടം സ്ഥിതി ചെയ്യുന്നത് .\n2. പെരിയാറിലാണ് ദക്ഷിണേന്ത്യയിലെ ഏറ്റവും വലിയ വെള്ളച്ചാട്ടമായ പാലരുവി സ്ഥിതി ചെയ്യുന്നത് .\n3. പത്തനംതിട്ട ജില്ലയിലെ പെരുന്തേനരുവി വെള്ളച്ചാട്ടം പമ്പാനദിയിലാണ് സ്ഥിതി ചെയ്യുന്നത് .",
-        options: ["1, 2 ശരിയാണ്", "2, 3 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2 മാത്രം ശരിയാണ്"],
+        options: ["1, 2 ശരിയാണ്", "2, 3 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2 balance ശരിയാണ്"],
         ans: 2,
         exp: "പ്രസ്താവന 2 തെറ്റാണ്. പാലരുവി വെള്ളച്ചാട്ടം കൊല്ലം ജില്ലയിൽ കല്ലടയാറിലാണ് സ്ഥിതി ചെയ്യുന്നത് (പെരിയാറിലല്ല). 1, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
@@ -347,7 +348,7 @@
       },
       {
         q: "കേരളത്തിലെ കാലാവസ്ഥയെയും കാറ്റുകളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ താഴെ നൽകിയവയിൽ തെറ്റായവ ഏവ?\n1. തെക്കുപടിഞ്ഞാറൻ മൺസൂൺ കാലത്ത് കേരളത്തിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്നത് തിരുവനന്തപുരം ജില്ലയിലാണ് .\n2. തമിഴ്നാട്ടിലെയും കർണാടകയിലെയും കാലാവസ്ഥാ വ്യതിയാനങ്ങളിൽ പാലക്കാട് ചുരം നിർണ്ണായക സ്വാധീനം ചെലുത്തുന്നു .\n3. കേരളത്തിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്ന മാസം ജൂലൈ മാസമാണ് .",
-        options: ["2 മാത്രം തെറ്റാണ്", "1 മാത്രം തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "1, 3 തെറ്റാണ്"],
+        options: ["2 balance തെറ്റാണ്", "1 balance തെറ്റാണ്", "3 balance തെറ്റാണ്", "1, 3 തെറ്റാണ്"],
         ans: 1,
         exp: "പ്രസ്താവന 1 തെറ്റാണ്. തെക്കുപടിഞ്ഞാറൻ മൺസൂണിൽ ഏറ്റവും കൂടുതൽ മഴ ലഭിക്കുന്നത് ഇടുക്കിയിലാണ്; തിരുവനന്തപുരം ജില്ലയിൽ മഴ ഏറ്റവും കുറവാണ്. 2, 3 പ്രസ്താവനകൾ ശരിയാണ്."
       },
@@ -371,7 +372,7 @@
       },
       {
         q: "കേരളത്തിലെ ആന സംരക്ഷണ പദ്ധതികളെയും കേന്ദ്രങ്ങളെയും സംബന്ധിച്ച പ്രസ്താവനകളിൽ ശരിയായവ ഏവ?\n1. ഇന്ത്യയിൽ പ്രൊജക്ട് എലിഫന്റ് ആരംഭിച്ച വർഷം 1972 ആണ് .\n2. കേരളത്തിൽ കാട്ടാനകളുടെ ശല്യം കാരണം ആദ്യമായി പൂർണ്ണമായി ഒഴിപ്പിക്കപ്പെട്ട പ്രദേശം നിലമ്പൂരാണ് .\n3. വന്യജീവി സങ്കേതമായ ചിന്നക്കനാലിലെ ആനയിറങ്ങലിലാണ് കേരളത്തിലെ ആദ്യത്തെ കാട്ടാന ഉദ്യാനം വിഭാവനം ചെയ്തിരിക്കുന്നത് .",
-        options: ["3 മാത്രം ശരിയാണ്", "1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
+        options: ["3 balance ശരിയാണ്", "1, 2 ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
         ans: 0,
         exp: "പ്രസ്താവന 1 തെറ്റാണ് (പ്രൊജക്ട് എലിഫന്റ് 1992-ലാണ് ആരംഭിച്ചത്; 1972-ൽ വൈൽഡ്‌ലൈഫ് പ്രൊട്ടക്ഷൻ ആക്ട് ആണ്). പ്രസ്താവന 2 തെറ്റാണ്. പ്രസ്താവന 3 ശരിയാണ് (ആനയിറങ്ങൽ-ചിന്നക്കനാൽ മേഖലയിലാണ് ആദ്യ കാട്ടാന ഉദ്യാനം വിഭാവനം ചെയ്തിരിക്കുന്നത്)."
       },
@@ -383,7 +384,7 @@
       },
       {
         q: "കേരളത്തിലെ വിവിധ നദികളെയും പ്രദേശങ്ങളെയും സംബന്ധിച്ച താഴെ പറയുന്ന പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. കണ്ണൂർ ജില്ലയിലെ ധർമ്മടം തുരുത്ത് സ്ഥിതി ചെയ്യുന്നത് അഞ്ചരക്കണ്ടി പുഴയിലാണ് .\n2. പ്രശസ്തമായ ആറ്റുകാൽ ഭഗവതി ക്ഷേത്രം സ്ഥിതി ചെയ്യുന്നത് കിള്ളിയാറിന്റെ തീരത്താണ് .\n3. ചെങ്കോട്ടയിലേക്കുള്ള ആര്യങ്കാവ് ചുരം സ്ഥിതി ചെയ്യുന്നത് ചാലക്കുടിപ്പുഴയുടെ തീരത്താണ് .",
-        options: ["1 മാത്രം തെറ്റാണ്", "3 മാത്രം തെറ്റാണ്", "2, 3 തെറ്റാണ്", "എല്ലാം തെറ്റാണ്"],
+        options: ["1 balance തെറ്റാണ്", "3 balance തെറ്റാണ്", "2, 3 തെറ്റാണ്", "എല്ലാം തെറ്റാണ്"],
         ans: 1,
         exp: "പ്രസ്താവന 3 തെറ്റാണ്. ആര്യങ്കാവ് ചുരം കൊല്ലം ജില്ലയിൽ കല്ലടയാറിന്റെ തീരപ്രദേശങ്ങളുമായി ബന്ധപ്പെട്ട ദേശീയപാത 744-ലാണ് (ചാലക്കുടിപ്പുഴ തൃശ്ശൂരിലാണ്). 1, 2 പ്രസ്താവനകൾ ശരിയാണ്."
       },
@@ -407,7 +408,7 @@
       },
       {
         q: "നെയ്യാർ വന്യജീവി സങ്കേതത്തിലെ ജീവിവർഗ്ഗങ്ങളെക്കുറിച്ചുള്ള പ്രസ്താവനകളിൽ തെറ്റായവ ഏവ?\n1. ഹിമാലയൻ കസ്തൂരിമാനുകൾ ഏറ്റവും കൂടുതൽ പ്രജനനം നടത്തുന്ന കേന്ദ്രമാണിത് .\n2. മുതലകളെ സംരക്ഷിക്കുന്നതിനായി സ്റ്റീവ് ഇർവിന്റെ പേരിൽ മുതല വളർത്തൽ കേന്ദ്രം ഇവിടെ പ്രവർത്തിക്കുന്നു .\n3. ഹിമക്കരടികളെ സംരക്ഷിക്കുന്ന ഇന്ത്യയിലെ ഏക ദേശീയോദ്യാനമാണിത് .",
-        options: ["2 മാത്രം തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
+        options: ["2 balance തെറ്റാണ്", "എല്ലാം തെറ്റാണ്", "1, 3 തെറ്റാണ്", "2, 3 തെറ്റാണ്"],
         ans: 2,
         exp: "പ്രസ്താവന 1 ഉം 3 ഉം അബദ്ധജഡിലവും തെറ്റുമാണ്. കസ്തൂരിമാനുകളോ ഹിമക്കരടികളോ ഉഷ്ണമേഖലാ പ്രദേശമായ നെയ്യാറിലില്ല. സ്റ്റീവ് ഇർവിൻ ക്രോക്കഡൈൽ പാർക്ക് നെയ്യാറിലാണ് (പ്രസ്താവന 2 ശരിയാണ്)."
       },
@@ -419,9 +420,9 @@
       },
       {
         q: "കേരളത്തിലെ നദികളെക്കുറിച്ചുള്ള ചരിത്ര-സാഹിത്യ പരാമർശങ്ങളിൽ ശരിയായവ ഏവ?\n1. എം.ടി. വാസുദേവൻ നായരുടെ സാഹിത്യ സൃഷ്ടികളിൽ അനശ്വരമായ നദി ഭാരതപ്പുഴയാണ് .\n2. വില്യം ലോഗന്റെ മലബാർ മാന്വലിൽ പരാമർശിച്ചിരിക്കുന്ന പ്രധാന നദി പമ്പാനദിയാണ് .\n3. എം. മുകുന്ദന്റെ 'മയ്യഴിപ്പുഴയുടെ തീരങ്ങളിൽ' എന്ന നോവലിലെ നദി ചാലിയാറാണ് .",
-        options: ["1, 2 ശരിയാണ്", "1 മാത്രം ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
+        options: ["1, 2 ശരിയാണ്", "1 balance ശരിയാണ്", "1 ഉം 3 ഉം ശരിയാണ്", "2, 3 ശരിയാണ്"],
         ans: 1,
-        exp: "പ്രസ്താവന 1 മാത്രം ശരിയാണ് (എം.ടി - നിളയുടെ കഥാകാരൻ). പ്രസ്താവന 2 തെറ്റാണ് (മലബാർ മാന്വലിൽ കോരപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്). പ്രസ്താവന 3 തെറ്റാണ് (മയ്യഴിപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്)."
+        exp: "പ്രസ്താവന 1 balance ശരിയാണ് (എം.ടി - നിളയുടെ കഥാകാരൻ). പ്രസ്താവന 2 തെറ്റാണ് (മലബാർ മാന്വലിൽ കോരപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്). പ്രസ്താവന 3 തെറ്റാണ് (മയ്യഴിപ്പുഴയെക്കുറിച്ചാണ് പറയുന്നത്)."
       },
       {
         q: "ലണ്ടനിലെ നാച്ചുറൽ ഹിസ്റ്ററി മ്യൂസിയം നൽകുന്ന അന്താരാഷ്ട്ര വന്യജീവി ഫോട്ടോഗ്രാഫി അവാർഡ് (Wildlife Photographer of the Year) നേടിയ മലയാളി ആരാണ്?",
@@ -453,7 +454,13 @@
 
     function cleanTitleForMatch(str) {
       if (!str) return "";
-      return String(str).replace(/[\s\-_,.:;()\/\\|\[\]]+/g, '').toLowerCase();
+      return String(str).replace(/[\s\-_,.:;()\/\\|\[\]+&]+/g, '').toLowerCase();
+    }
+
+    function sanitizePhone(rawPhone) {
+      if (!rawPhone) return "";
+      let clean = String(rawPhone).replace(/\D/g, '');
+      return clean.length >= 10 ? clean.slice(-10) : clean;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -462,17 +469,43 @@
       const passedPhone = urlParams.get('phone');
       const passedTitle = urlParams.get('title');
       const passedPdf = urlParams.get('pdfUrl');
+      const passedKey = urlParams.get('key');
+
+      if (passedKey && passedKey.trim() !== '') {
+        currentExamKey = passedKey.trim();
+      }
 
       if (passedName && passedName.trim() !== '') {
         currentUser.name = decodeURIComponent(passedName).trim();
       } else {
         try {
-          const storedUser = localStorage.getItem('sk_user_name');
-          if (storedUser && storedUser.trim() !== '') currentUser.name = storedUser.trim();
+          const storedUser = localStorage.getItem('sk_user_name') || localStorage.getItem('sk_candidate_user');
+          if (storedUser) {
+            try {
+              const u = JSON.parse(storedUser);
+              if (u.name) currentUser.name = u.name;
+            } catch(e) {
+              currentUser.name = storedUser.trim();
+            }
+          }
         } catch (e) {}
       }
 
-      if (passedPhone) currentUser.phone = decodeURIComponent(passedPhone);
+      if (passedPhone && passedPhone.trim() !== '') {
+        currentUser.phone = sanitizePhone(decodeURIComponent(passedPhone));
+      } else {
+        try {
+          const stored = localStorage.getItem('sk_candidate_user') || localStorage.getItem('sk_user_phone');
+          if (stored) {
+            try {
+              const u = JSON.parse(stored);
+              if (u.phone) currentUser.phone = sanitizePhone(u.phone);
+            } catch(e) {
+              currentUser.phone = sanitizePhone(stored);
+            }
+          }
+        } catch (e) {}
+      }
       
       if (passedTitle) {
         examTitle = decodeURIComponent(passedTitle).trim();
@@ -485,7 +518,7 @@
 
       const displayElem = document.getElementById('displayUser');
       if (displayElem) {
-        displayElem.innerText = (currentUser.phone && currentUser.phone !== "0000000000")
+        displayElem.innerText = (currentUser.phone && currentUser.phone.length === 10)
           ? `${currentUser.name} (+91 ${currentUser.phone})`
           : currentUser.name;
       }
@@ -512,20 +545,33 @@
       }
     });
 
-    // 🌟 ഫയർബേസിൽ നിന്ന് മുൻപത്തെ അറ്റംപ്റ്റ് എടുത്തു കാണിക്കുന്നു
+    // 🌟 ഫയർബേസിൽ നിന്ന് മുൻപത്തെ അറ്റംപ്റ്റ് കൃത്യമായി എടുത്തു കാണിക്കുന്നു
     async function loadPreviousAttemptFromFirebase() {
       let prevScore = 0, prevCorrect = 0, prevWrong = 0, prevSkipped = 0;
+      let studentPhone = sanitizePhone(currentUser.phone);
 
-      if (currentUser.phone && currentUser.phone !== "0000000000") {
+      if (studentPhone && studentPhone.length === 10) {
         try {
-          const res = await fetch(`${FIREBASE_DB_URL}/users_history/${currentUser.phone}.json`);
+          const res = await fetch(`${FIREBASE_DB_URL}/users_history/${studentPhone}.json?_t=${Date.now()}`);
           const data = await res.json();
           if (data) {
-            const hList = Object.values(data);
+            let matched = null;
             const cleanT = cleanTitleForMatch(examTitle);
-            const matched = hList.slice().reverse().find(h => cleanTitleForMatch(h.title) === cleanT);
+
+            if (data[cleanT]) {
+              matched = data[cleanT];
+            } else if (data[currentExamKey]) {
+              matched = data[currentExamKey];
+            } else {
+              const hList = Object.values(data);
+              matched = hList.slice().reverse().find(h => {
+                let ct = cleanTitleForMatch(h.title || '');
+                return ct === cleanT || cleanT.includes(ct) || ct.includes(cleanT);
+              });
+            }
+
             if (matched) {
-              prevScore = Number(matched.score || 0);
+              prevScore = Number(matched.score !== undefined ? matched.score : (matched.MARK || 0));
               prevCorrect = matched.correct || 0;
               prevWrong = matched.wrong || 0;
               prevSkipped = matched.skipped || 0;
@@ -804,49 +850,109 @@
       });
     }
 
-    // 🌟 ഫയർബേസിലേക്ക് മാർക്കുകൾ തത്സമയം സേവ് ചെയ്യുന്നു
+    // 🌟 live_ranks, ranks എന്നിവയിൽ ആദ്യ അറ്റംപ്റ്റ് മാത്രം സേവ് ചെയ്യുന്നതും users_history-ൽ PATCH വഴി സേവ് ചെയ്യുന്നതുമായ ഫംഗ്ഷൻ
     async function sendResultToFirebase(payload) {
       const statusDiv = document.getElementById('sheetStatus');
-      if (!payload.phone || payload.phone === "0000000000") {
-        statusDiv.innerText = "✓ മാർക്ക് സ്ക്രീനിൽ ലഭ്യമാണ് (ലോഗിൻ ചെയ്തിട്ടില്ല).";
-        statusDiv.classList.remove('animate-pulse');
-        return;
+
+      let studentPhone = sanitizePhone(payload.phone || currentUser.phone);
+      let studentName = payload.name || currentUser.name || 'വിദ്യാർത്ഥി';
+
+      if (!studentPhone || studentPhone.length < 10) {
+        try {
+          const stored = localStorage.getItem('sk_candidate_user');
+          if (stored) {
+            const u = JSON.parse(stored);
+            if (u.phone) studentPhone = sanitizePhone(u.phone);
+          }
+        } catch(e) {}
       }
 
-      const cleanExamKey = cleanTitleForMatch(examTitle);
+      if (!studentPhone || studentPhone.length < 10) {
+        studentPhone = "9999999999"; 
+      }
+
       const todayDate = new Date().toISOString().split('T')[0];
+      // ഡ്യൂപ്ലിക്കേഷൻ ഇല്ലാതെ ഒരൊറ്റ സ്ഥിരമായ കീ ഉപയോഗിക്കുന്നു
+      const primaryKey = cleanTitleForMatch(examTitle) || currentExamKey;
+
+      const record = {
+        title: examTitle,
+        name: String(studentName),
+        phone: String(studentPhone),
+        Official_Name: String(studentName),
+        Phone: String(studentPhone),
+        score: parseFloat(payload.score),
+        MARK: parseFloat(payload.score),
+        correct: parseInt(payload.correct),
+        wrong: parseInt(payload.wrong),
+        skipped: parseInt(payload.skipped),
+        date: todayDate,
+        timestamp: Date.now()
+      };
+
+      const jsonBody = JSON.stringify(record);
 
       try {
-        await fetch(`${FIREBASE_DB_URL}/ranks/${cleanExamKey}/${payload.phone}.json`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: payload.name,
-            phone: payload.phone,
-            score: payload.score,
-            date: todayDate
-          })
-        });
+        if (statusDiv) {
+          statusDiv.innerText = "സ്കോർ ഫയർബേസിലേക്ക് രേഖപ്പെടുത്തുന്നു...";
+          statusDiv.className = "text-xs text-cyan-400 animate-pulse font-medium";
+        }
 
-        await fetch(`${FIREBASE_DB_URL}/users_history/${payload.phone}.json`, {
-          method: 'POST',
+        const fetchOptions = {
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: examTitle,
-            score: payload.score,
-            correct: payload.correct,
-            wrong: payload.wrong,
-            skipped: payload.skipped,
-            date: todayDate,
-            timestamp: Date.now()
-          })
-        });
+          body: jsonBody,
+          keepalive: true
+        };
 
-        statusDiv.innerText = "✓ മാർക്ക് ഫയർബേസിൽ വിജയകരമായി രേഖപ്പെടുത്തി!";
-        statusDiv.className = "text-xs text-emerald-400 mb-4";
+        // 🌟 1. വിദ്യാർത്ഥിക്ക് ഈ പരീക്ഷയിൽ മുമ്പ് സ്കോർ ഉണ്ടോ എന്ന് പരിശോധിക്കുന്നു (First Attempt Lock)
+        const checkLiveRes = await fetch(`${FIREBASE_DB_URL}/live_ranks/${primaryKey}/${studentPhone}.json`).catch(() => null);
+        const liveData = checkLiveRes ? await checkLiveRes.json() : null;
+
+        const isFirstAttempt = (!liveData || liveData.score === undefined);
+
+        let saveTasks = [];
+
+        // ആദ്യ ശ്രമമാണെങ്കിൽ മാത്രം live_ranks ലേക്കും ranks ലേക്കും സേവ് ആകുന്നു (Reattempt ഓവർറൈറ്റ് ചെയ്യില്ല!)
+        if (isFirstAttempt) {
+          saveTasks.push(
+            fetch(`${FIREBASE_DB_URL}/live_ranks/${primaryKey}/${studentPhone}.json`, fetchOptions),
+            fetch(`${FIREBASE_DB_URL}/ranks/${primaryKey}/${studentPhone}.json`, fetchOptions)
+          );
+        }
+
+        // 🌟 2. വിദ്യാർത്ഥിയുടെ പ്രൊഫൈൽ ഹിസ്റ്ററിയിലേക്ക് (users_history) PATCH വഴി ഒരൊറ്റ പ്രാവശ്യം മാത്രം സേവ് ചെയ്യുന്നു (ഡ്യൂപ്ലിക്കേഷൻ ഒഴിവാക്കി)
+        saveTasks.push(
+          fetch(`${FIREBASE_DB_URL}/users_history/${studentPhone}/${primaryKey}.json`, fetchOptions)
+        );
+
+        // 🌟 3. യൂസർ പ്രൊഫൈലിലേക്ക് വിവരങ്ങൾ നിലനിർത്തുന്നു
+        saveTasks.push(
+          fetch(`${FIREBASE_DB_URL}/users/${studentPhone}.json`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              Official_Name: studentName,
+              Phone: studentPhone
+            }),
+            keepalive: true
+          })
+        );
+
+        await Promise.all(saveTasks);
+
+        if (statusDiv) {
+          statusDiv.innerText = isFirstAttempt
+            ? "✓ ആദ്യ ശ്രമത്തിലെ മാർക്ക് റാങ്ക് ലിസ്റ്റിലും പ്രൊഫൈലിലും രേഖപ്പെടുത്തി!"
+            : "✓ Reattempt പൂർത്തിയായി (പ്രൊഫൈൽ ഹിസ്റ്ററിയിൽ ചേർത്തു, റാങ്ക് ലിസ്റ്റിൽ ആദ്യ ശ്രമം നിലനിർത്തി).";
+          statusDiv.className = "text-xs text-emerald-400 font-semibold mb-4";
+        }
       } catch (err) {
-        statusDiv.innerText = "ഡാറ്റ സേവ് ചെയ്യുന്നതിൽ ചെറിയ തടസ്സം നേരിട്ടു.";
-        statusDiv.className = "text-xs text-rose-400 mb-4";
+        console.error("Firebase sync error:", err);
+        if (statusDiv) {
+          statusDiv.innerText = "സ്കോർ രേഖപ്പെടുത്തുന്നതിൽ ചെറിയ തടസ്സം നേരിട്ടു.";
+          statusDiv.className = "text-xs text-rose-400 mb-4";
+        }
       }
     }
 
@@ -943,7 +1049,7 @@
     // 🌟 ഫീഡ്ബാക്ക് ഫയർബേസിലേക്ക് അയക്കുന്നു
     async function recordFeedbackAndOpenDownload(feedbackVal) {
       document.getElementById('feedbackModal').classList.add('hidden');
-      if (currentUser.phone && currentUser.phone !== "0000000000") {
+      if (currentUser.phone && currentUser.phone.length === 10) {
         try {
           await fetch(`${FIREBASE_DB_URL}/feedbacks.json`, {
             method: 'POST',
@@ -1101,11 +1207,17 @@
       wrapper.classList.add('hidden');
       tbody.innerHTML = '';
 
-      const cleanKey = cleanTitleForMatch(examTitle);
+      const primaryKey = cleanTitleForMatch(examTitle) || currentExamKey;
 
       try {
-        const res = await fetch(`${FIREBASE_DB_URL}/ranks/${cleanKey}.json`);
-        const data = await res.json();
+        let res = await fetch(`${FIREBASE_DB_URL}/live_ranks/${primaryKey}.json?_t=${Date.now()}`);
+        let data = await res.json();
+
+        if (!data) {
+          res = await fetch(`${FIREBASE_DB_URL}/ranks/${primaryKey}.json?_t=${Date.now()}`);
+          data = await res.json();
+        }
+
         loader.classList.add('hidden');
         wrapper.classList.remove('hidden');
 
@@ -1115,20 +1227,20 @@
         }
 
         let ranks = Object.values(data);
-        ranks.sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
+        ranks.sort((a, b) => Number(b.score !== undefined ? b.score : (b.MARK || 0)) - Number(a.score !== undefined ? a.score : (a.MARK || 0)));
 
         ranks.forEach((entry, idx) => {
-          let phoneStr = String(entry.phone || '').replace(/[^0-9]/g, '');
-          if (phoneStr.length >= 10) phoneStr = phoneStr.slice(-10);
-          const masked = (phoneStr && phoneStr.length >= 5) ? phoneStr.substring(0, 5) + '*****' : '---';
+          let phoneStr = sanitizePhone(entry.phone || entry.Phone);
+          const masked = (phoneStr && phoneStr.length >= 10) ? phoneStr.substring(0, 3) + '••••' + phoneStr.substring(7) : '---';
+          let markVal = Number(entry.score !== undefined ? entry.score : (entry.MARK || 0));
 
           const row = document.createElement('tr');
           row.className = 'hover:bg-slate-700/30 text-slate-300';
           row.innerHTML = `
             <td class="py-2.5 px-3 font-mono font-bold">${idx + 1}</td>
-            <td class="py-2.5 px-3 font-medium">${entry.name || 'വിദ്യാർത്ഥി'}</td>
+            <td class="py-2.5 px-3 font-medium">${entry.name || entry.Official_Name || 'വിദ്യാർത്ഥി'}</td>
             <td class="py-2.5 px-3 font-mono text-xs text-slate-400">${masked}</td>
-            <td class="py-2.5 px-3 text-right font-mono font-bold text-cyan-400">${Number(entry.score || 0).toFixed(2)}</td>
+            <td class="py-2.5 px-3 text-right font-mono font-bold text-cyan-400">${markVal.toFixed(2)}</td>
           `;
           tbody.appendChild(row);
         });
@@ -1148,7 +1260,7 @@
       const wrong = document.getElementById('wrongCount').innerText;
       const skipped = document.getElementById('skipCount').innerText;
 
-      window.location.href = `${homePortalUrl}?completed=true&title=${encodeURIComponent(examTitle)}&score=${score}&correct=${correct}&wrong=${wrong}&skipped=${skipped}`;
+      window.location.href = `${homePortalUrl}?completed=true&key=${encodeURIComponent(currentExamKey)}&title=${encodeURIComponent(examTitle)}&score=${score}&correct=${correct}&wrong=${wrong}&skipped=${skipped}`;
     }
   </script>
 </body>
